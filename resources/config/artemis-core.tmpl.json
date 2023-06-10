@@ -1,0 +1,20 @@
+{
+    "service": {
+        "host": "127.0.0.1",
+        "port": 55555
+    },
+    "database": {
+        "dbname": "artemis-core",
+        "user": "",
+        "password": "",
+        "host": "127.0.0.1",
+        "port": 55557,
+        "sslmode": "disable"
+    },
+    "cache": {
+        "host": "127.0.0.1",
+        "port": 55556,
+        "password": "",
+        "db": 0
+    }
+}
