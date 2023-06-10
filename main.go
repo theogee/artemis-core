@@ -1,9 +1,18 @@
 package main
 
 import (
-	"fmt"
+	"github.com/theogee/artemis-core/pkg/logger"
 )
 
 func main() {
-	fmt.Println("hello from artemis-core")
+	logger.Setup("main.log")
+	
+	var (
+		logPrefix = "[main]"
+		log = logger.Log
+	)
+	
+	log.Printf("%v hello from artemis-core!", logPrefix)
+
+	logger.Close()
 }

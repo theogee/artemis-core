@@ -1,1 +1,4 @@
 docker/.env
+resources/config/artemis-core.json
+artemis-core.exe
+main.log
