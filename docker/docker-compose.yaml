@@ -1,0 +1,38 @@
+version: "3.8"
+
+networks:
+    artemis-core-network:
+        driver: bridge
+        name: artemis-core-network
+
+services:
+    artemis-core-redis:
+        image: redis
+        container_name: artemis-core-redis
+        volumes:
+            - artemis-core-redis-volume:/var/lib/redis/data
+        ports:
+            - "${ARTEMIS_CORE_REDIS_PORT}:6379"
+        networks:
+            - artemis-core-network
+
+    artemis-core-postgres:
+        image: postgres
+        container_name: artemis-core-postgres
+        environment:
+            POSTGRES_USER: ${ARTEMIS_CORE_PG_USER}
+            POSTGRES_PASSWORD: ${ARTEMIS_CORE_PG_PASSWORD}
+            POSTGRES_DB: ${ARTEMIS_CORE_PG_DB}
+            PGDATA: /var/lib/postgres/data
+        volumes:
+            - artemis-core-postgres-volume:/var/lib/postgres/data
+        ports:
+            - "${ARTEMIS_CORE_PG_PORT}:5432"
+        networks:
+            - artemis-core-network
+
+volumes:
+    artemis-core-postgres-volume:
+        name: artemis-core-postgres-volume
+    artemis-core-redis-volume:
+        name: artemis-core-redis-volume
