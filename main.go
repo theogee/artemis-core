@@ -1,6 +1,8 @@
 package main
 
 import (
+	"github.com/theogee/artemis-core/pkg/config"
+	"github.com/theogee/artemis-core/pkg/connection/cache"
 	"github.com/theogee/artemis-core/pkg/logger"
 )
 
@@ -12,7 +14,9 @@ func main() {
 		log       = logger.Log
 	)
 
-	// cfg := config.Load("resources/config/artemis-core.json")
+	cfg := config.Load("resources/config/artemis-core.json")
+
+	cache.NewCache(cfg)
 
 	log.Printf("%v hello from artemis-core!", logPrefix)
 
