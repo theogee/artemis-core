@@ -9,6 +9,7 @@ import (
 
 func main() {
 	logger.Setup("main.log")
+	defer logger.Close()
 
 	var (
 		logPrefix = "[main]"
@@ -23,5 +24,8 @@ func main() {
 
 	log.Printf("%v hello from artemis-core!", logPrefix)
 
-	logger.Close()
+	// records := parser.ParseCSV("resources/uploads/data.csv")
+	// for _, r := range records {
+	// 	fmt.Println(r.GivenName)
+	// }
 }

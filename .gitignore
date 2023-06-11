@@ -1,4 +1,5 @@
 docker/.env
 resources/config/artemis-core.json
+resources/uploads/*
 artemis-core.exe
 main.log
