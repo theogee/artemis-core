@@ -7,7 +7,10 @@ require (
 	github.com/jmoiron/sqlx v1.3.5
 )
 
-require github.com/gocarina/gocsv v0.0.0-20230513223533-9ddd7fd60602
+require (
+	github.com/gocarina/gocsv v0.0.0-20230513223533-9ddd7fd60602
+	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
+)
 
 require (
 	github.com/lib/pq v1.10.9

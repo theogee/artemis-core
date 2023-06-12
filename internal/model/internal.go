@@ -1,5 +1,24 @@
 package model
 
+var (
+	SGUMajors = map[string]int{
+		"Mechatronics":                    1,
+		"Business Management":             2,
+		"Global Strategic Communications": 3,
+		"Information Technology":          4,
+		"Biomedical Engineering":          5,
+		"Pharmaceutical Engineering":      6,
+		"Food Technology":                 7,
+		"Accounting":                      8,
+		"Industrial Engineering":          9,
+	}
+
+	FHDepartments = map[string]int{
+		"Wirtschaftsingenieurwesen":                1,
+		"Business Administration with Informatics": 2,
+	}
+)
+
 type (
 	Student struct {
 		GivenName      string `csv:"given_name"`

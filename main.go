@@ -16,16 +16,13 @@ func main() {
 		log       = logger.Log
 	)
 
-	cfg := config.Load("resources/config/artemis-core.json")
-
-	cache.NewCache(cfg)
-
-	database.NewDatabase(cfg)
-
 	log.Printf("%v hello from artemis-core!", logPrefix)
 
-	// records := parser.ParseCSV("resources/uploads/data.csv")
-	// for _, r := range records {
-	// 	fmt.Println(r.GivenName)
-	// }
+	cfg := config.Load("resources/config/artemis-core.json")
+
+	c := cache.NewCache(cfg)
+
+	db := database.NewDatabase(cfg)
+
+	startApp(cfg, db, c)
 }
