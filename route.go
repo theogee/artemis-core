@@ -1,0 +1,11 @@
+package main
+
+import (
+	"github.com/julienschmidt/httprouter"
+	artemis "github.com/theogee/artemis-core/internal/handler"
+	"github.com/theogee/artemis-core/pkg/config"
+)
+
+func registerRoutes(cfg *config.Config, router *httprouter.Router, artemisHandler *artemis.ArtemisHandler) {
+	router.POST("/api/adm/register", artemisHandler.RegisterAsAdmin)
+}
