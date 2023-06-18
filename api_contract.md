@@ -3,6 +3,7 @@
 ## LoginAsAdmin
 
 ```
+endpoint: /api/adm/login
 request
 {
     username: string
@@ -23,10 +24,12 @@ set-cookie: artemis.sid
 ## RegisterAsAdmin
 
 ```
+endpoint: /api/adm/register
 request
 {
     username: string
     password: string
+    emai: string
 }
 
 response
@@ -34,6 +37,27 @@ response
     success: bool
     servError: []string
     data: RegisterAsAdminResponse {
+        errMessage: []string
+        Message: []string
+    }
+}
+```
+
+### Logout (common)
+
+```
+endpoint:
+  - /api/adm/logout
+  - /api/st/logout (to be implemented)
+cookie: artemis.sid
+request
+{}
+
+response
+{
+    success: bool
+    servError: []string
+    data: LogoutResponse {
         errMessage: []string
         Message: []string
     }

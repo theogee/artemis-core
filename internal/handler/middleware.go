@@ -22,7 +22,7 @@ func (h *ArtemisHandler) Authenticate(n httprouter.Handle, mode string) httprout
 				ServError: []string{},
 			}
 
-			d = &model.Authenticate{
+			d = &model.AuthenticateResponse{
 				ErrMessage: []string{},
 				Message:    []string{},
 			}

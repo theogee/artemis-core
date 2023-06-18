@@ -21,7 +21,7 @@ func (h *ArtemisHandler) Logout(w http.ResponseWriter, r *http.Request, ps httpr
 			ServError: []string{},
 		}
 
-		d = &model.Logout{
+		d = &model.LogoutResponse{
 			ErrMessage: []string{},
 			Message:    []string{},
 		}

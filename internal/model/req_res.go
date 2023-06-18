@@ -45,12 +45,12 @@ type (
 		Message    []string `json:"message,omitempty"`
 	}
 
-	Authenticate struct {
+	AuthenticateResponse struct {
 		ErrMessage []string `json:"errMessage,omitempty"`
 		Message    []string `json:"message,omitempty"`
 	}
 
-	Logout struct {
+	LogoutResponse struct {
 		ErrMessage []string `json:"errMessage,omitempty"`
 		Message    []string `json:"message,omitempty"`
 	}
