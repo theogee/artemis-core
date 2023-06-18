@@ -8,7 +8,7 @@ import (
 	"github.com/theogee/artemis-core/pkg/logger"
 )
 
-func SendJSON(w http.ResponseWriter, data interface{}, statusCode int) {
+func SendJSON(w http.ResponseWriter, cookies []*http.Cookie, data interface{}, statusCode int) {
 	var (
 		logPrefix = "[utils_http.SendJSON]"
 		log       = logger.Log
@@ -18,6 +18,10 @@ func SendJSON(w http.ResponseWriter, data interface{}, statusCode int) {
 
 	defer func() {
 		w.Header().Set("content-type", "application/json")
+
+		for _, c := range cookies {
+			http.SetCookie(w, c)
+		}
 
 		w.WriteHeader(statusCode)
 

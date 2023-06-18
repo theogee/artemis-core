@@ -10,6 +10,7 @@ require (
 require github.com/gocarina/gocsv v0.0.0-20230513223533-9ddd7fd60602
 
 require (
+	github.com/google/uuid v1.3.0
 	github.com/julienschmidt/httprouter v1.3.0
 	github.com/lib/pq v1.10.9
 	github.com/onsi/ginkgo v1.16.5 // indirect

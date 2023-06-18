@@ -13,6 +13,7 @@ type (
 		Service  Service  `json:"service"`
 		Database Database `json:"database"`
 		Cache    Cache    `json:"cache"`
+		API      API      `json:"api"`
 	}
 
 	Service struct {
@@ -34,6 +35,11 @@ type (
 		Port     int    `json:"port"`
 		Password string `json:"password"`
 		DB       int    `json:"db"`
+	}
+
+	API struct {
+		AdminAuthSessionExpiration int    `json:"admin_auth_session_expiration"`
+		AdminAuthCookieName        string `json:"admin_auth_cookie_name"`
 	}
 )
 

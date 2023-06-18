@@ -16,5 +16,9 @@
         "port": 55556,
         "password": "",
         "db": 0
+    },
+    "api": {
+        "admin_auth_session_expiration": 180,
+        "admin_auth_cookie_name": "artemis.sid"
     }
 }

@@ -1,7 +1,6 @@
 package artemis
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
@@ -10,9 +9,9 @@ import (
 	utilsHTTP "github.com/theogee/artemis-core/pkg/utils/http"
 )
 
-func (h *ArtemisHandler) RegisterAsAdmin(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+func (h *ArtemisHandler) LoginAsAdmin(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	var (
-		logPrefix = "[artemis.ArtemisHandler.RegisterAsAdmin]"
+		logPrefix = "[artemis.ArtemisHandler.LoginAsAdmin]"
 		log       = logger.Log
 
 		statusCode = http.StatusBadRequest
@@ -22,7 +21,7 @@ func (h *ArtemisHandler) RegisterAsAdmin(w http.ResponseWriter, r *http.Request,
 			ServError: []string{},
 		}
 
-		d = &model.RegisterAsAdminResponse{
+		d = &model.LoginAsAdminResponse{
 			ErrMessage: []string{},
 			Message:    []string{},
 		}
@@ -47,38 +46,40 @@ func (h *ArtemisHandler) RegisterAsAdmin(w http.ResponseWriter, r *http.Request,
 		d.ErrMessage = append(d.ErrMessage, model.PasswordCantBeEmpty)
 	}
 
-	email := r.FormValue("email")
-	if email == "" {
-		log.Printf("%v error email can't be empty", logPrefix)
-		d.ErrMessage = append(d.ErrMessage, model.EmailCantBeEmpty)
-	}
-
 	if len(d.ErrMessage) != 0 {
 		return
 	}
 
-	data := &model.RegisterAsAdminRequest{
+	data := &model.LoginAsAdminRequest{
 		Username: username,
 		Password: password,
-		Email:    email,
 	}
 
-	err := h.artemisUsecase.RegisterAsAdmin(data)
+	sid, err := h.artemisUsecase.LoginAsAdmin(data)
 	if err != nil {
-		if err.Error() == model.UsernameAlreadyExist {
-			log.Printf("%v error registering admin with username: %v. err: username already exist", logPrefix, username)
-			d.ErrMessage = append(d.ErrMessage, model.UsernameAlreadyExist)
+		if err.Error() == model.IncorrectCredential {
+			log.Printf("%v error incorrect username or password", logPrefix)
+
+			d.ErrMessage = append(d.ErrMessage, model.IncorrectCredential)
+			statusCode = http.StatusUnauthorized
 			return
 		}
 
-		// internal server error
-		log.Printf("%v error calling artemisUsecase.RegisterAsAdmin. err: %v", logPrefix, err)
-		statusCode = http.StatusInternalServerError
+		log.Printf("%v error calling artemisUsecase.LoginAsAdmin. err: %v", logPrefix, err)
 		resp.ServError = append(resp.ServError, err.Error())
+		statusCode = http.StatusInternalServerError
 		return
 	}
 
-	statusCode = http.StatusCreated
+	cookie := http.Cookie{
+		Name:     h.cfg.API.AdminAuthCookieName,
+		MaxAge:   h.cfg.API.AdminAuthSessionExpiration,
+		HttpOnly: true,
+		Value:    sid,
+	}
+
+	cookies = append(cookies, &cookie)
+
+	statusCode = http.StatusOK
 	resp.Success = true
-	d.Message = append(d.Message, fmt.Sprintf(model.AdminCreatedSuccessfully, username))
 }

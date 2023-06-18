@@ -6,6 +6,7 @@ const (
 	PasswordCantBeEmpty  = "password can't be empty"
 	UsernameAlreadyExist = "username already exist"
 	EmailCantBeEmpty     = "email can't be empty"
+	IncorrectCredential  = "incorrect username or password"
 )
 
 const (
@@ -26,6 +27,7 @@ type (
 
 	LoginAsAdminResponse struct {
 		ErrMessage []string `json:"errMessage,omitempty"`
+		Message    []string `json:"message,omitempty"`
 	}
 
 	RegisterAsAdminRequest struct {

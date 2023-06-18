@@ -1,5 +1,7 @@
 package model
 
+import "database/sql"
+
 var (
 	SGUMajors = map[string]int{
 		"Mechatronics":                    1,
@@ -44,13 +46,13 @@ type (
 	}
 
 	Admin struct {
-		AdminID     uint32 `db:"admin_id" json:"admin_id"`
-		Username    string `db:"username" json:"username"`
-		Password    string `db:"password" json:"-"`
-		Email       string `db:"email" json:"email"`
-		MobilePhone string `db:"mobile_phone" json:"mobile_phone"`
-		Address     string `db:"address" json:"address"`
-		City        string `db:"city" json:"city"`
-		Postcode    int    `db:"postcode" json:"postcode"`
+		AdminID     uint32         `db:"admin_id" json:"admin_id"`
+		Username    string         `db:"username" json:"username"`
+		Password    string         `db:"password" json:"-"`
+		Email       string         `db:"email" json:"email"`
+		MobilePhone sql.NullString `db:"mobile_phone" json:"mobile_phone"`
+		Address     sql.NullString `db:"address" json:"address"`
+		City        sql.NullString `db:"city" json:"city"`
+		Postcode    sql.NullInt16  `db:"postcode" json:"postcode"`
 	}
 )
