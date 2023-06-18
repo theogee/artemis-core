@@ -10,6 +10,10 @@ const (
 )
 
 const (
+	UnauthorizedAccess = "unauthorized access"
+)
+
+const (
 	AdminCreatedSuccessfully = "new admin with username: %v has been created"
 )
 
@@ -37,6 +41,16 @@ type (
 	}
 
 	RegisterAsAdminResponse struct {
+		ErrMessage []string `json:"errMessage,omitempty"`
+		Message    []string `json:"message,omitempty"`
+	}
+
+	Authenticate struct {
+		ErrMessage []string `json:"errMessage,omitempty"`
+		Message    []string `json:"message,omitempty"`
+	}
+
+	Logout struct {
 		ErrMessage []string `json:"errMessage,omitempty"`
 		Message    []string `json:"message,omitempty"`
 	}

@@ -38,8 +38,10 @@ type (
 	}
 
 	API struct {
-		AdminAuthSessionExpiration int    `json:"admin_auth_session_expiration"`
-		AdminAuthCookieName        string `json:"admin_auth_cookie_name"`
+		AdminAuthSessionExpiration   int    `json:"admin_auth_session_expiration"`
+		AdminAuthCookieName          string `json:"admin_auth_cookie_name"`
+		StudentAuthSessionExpiration int    `json:"student_auth_session_expiration"`
+		StudentAuthCookieName        string `json:"student_auth_cookie_name"`
 	}
 )
 
