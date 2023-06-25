@@ -30,8 +30,10 @@ type (
 	}
 
 	LoginAsAdminResponse struct {
-		ErrMessage []string `json:"errMessage,omitempty"`
-		Message    []string `json:"message,omitempty"`
+		ErrMessage    []string `json:"errMessage,omitempty"`
+		Message       []string `json:"message,omitempty"`
+		UsernameError string   `json:"usernameError,omitempty"`
+		PasswordError string   `json:"passwordError,omitempty"`
 	}
 
 	RegisterAsAdminRequest struct {

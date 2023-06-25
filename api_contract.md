@@ -16,7 +16,8 @@ set-cookie: artemis.sid
     success: bool
     servError: []string
     data: LoginAsAdminResponse {
-        errMessage: []string
+        usernameError: string
+        passwordError: string
     }
 }
 ```

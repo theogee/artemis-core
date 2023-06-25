@@ -38,12 +38,14 @@ func (h *ArtemisHandler) LoginAsAdmin(w http.ResponseWriter, r *http.Request, ps
 	if username == "" {
 		log.Printf("%v error username can't be empty", logPrefix)
 		d.ErrMessage = append(d.ErrMessage, model.UsernameCantBeEmpty)
+		d.UsernameError = model.UsernameCantBeEmpty
 	}
 
 	password := r.FormValue("password")
 	if password == "" {
 		log.Printf("%v error password can't be empty", logPrefix)
 		d.ErrMessage = append(d.ErrMessage, model.PasswordCantBeEmpty)
+		d.PasswordError = model.PasswordCantBeEmpty
 	}
 
 	if len(d.ErrMessage) != 0 {
@@ -60,6 +62,8 @@ func (h *ArtemisHandler) LoginAsAdmin(w http.ResponseWriter, r *http.Request, ps
 		if err.Error() == model.IncorrectCredential {
 			log.Printf("%v error incorrect username or password", logPrefix)
 
+			d.UsernameError = model.IncorrectCredential
+			d.PasswordError = model.IncorrectCredential
 			d.ErrMessage = append(d.ErrMessage, model.IncorrectCredential)
 			statusCode = http.StatusUnauthorized
 			return
