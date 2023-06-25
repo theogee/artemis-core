@@ -42,6 +42,8 @@ type (
 		AdminAuthCookieName          string `json:"admin_auth_cookie_name"`
 		StudentAuthSessionExpiration int    `json:"student_auth_session_expiration"`
 		StudentAuthCookieName        string `json:"student_auth_cookie_name"`
+		AuthSessionExpiration        int    `json:"auth_session_expiration"`
+		AuthCookieName               string `json:"auth_cookie_name"`
 	}
 )
 

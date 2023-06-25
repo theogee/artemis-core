@@ -24,9 +24,21 @@ type (
 		Data      interface{} `json:"data,omitempty"`
 	}
 
+	LoginRequest struct {
+		Username string
+		Password string
+	}
+
 	LoginAsAdminRequest struct {
 		Username string
 		Password string
+	}
+
+	LoginResponse struct {
+		ErrMessage    []string `json:"errMessage,omitempty"`
+		Message       []string `json:"message,omitempty"`
+		UsernameError string   `json:"usernameError,omitempty"`
+		PasswordError string   `json:"passwordError,omitempty"`
 	}
 
 	LoginAsAdminResponse struct {

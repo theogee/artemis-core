@@ -17,4 +17,10 @@ const (
 		INSERT INTO admins (admin_id, username, password, email)
 		VALUES (DEFAULT, $1, $2, $3)
 	`
+
+	GetStudentByUsernameQuery = `
+		SELECT *
+		FROM students
+		WHERE username = $1
+	`
 )

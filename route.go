@@ -8,8 +8,8 @@ import (
 
 func registerRoutes(cfg *config.Config, router *httprouter.Router, artemisHandler *artemis.ArtemisHandler) {
 	router.POST("/api/adm/register", artemisHandler.RegisterAsAdmin)
-	router.POST("/api/adm/login", artemisHandler.LoginAsAdmin)
+	router.POST("/api/login", artemisHandler.Login)
 
 	// protected routes
-	router.POST("/api/adm/logout", artemisHandler.Authenticate(artemisHandler.Logout, "adm"))
+	router.POST("/api/logout", artemisHandler.Authenticate(artemisHandler.Logout))
 }

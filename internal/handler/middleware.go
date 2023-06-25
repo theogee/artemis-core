@@ -9,7 +9,7 @@ import (
 	utilHTTP "github.com/theogee/artemis-core/pkg/utils/http"
 )
 
-func (h *ArtemisHandler) Authenticate(n httprouter.Handle, mode string) httprouter.Handle {
+func (h *ArtemisHandler) Authenticate(n httprouter.Handle) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		var (
 			logPrefix = "[artemis.ArtemisHandler.AuthenticateAdmin]"
@@ -30,7 +30,7 @@ func (h *ArtemisHandler) Authenticate(n httprouter.Handle, mode string) httprout
 			cookies = []*http.Cookie{}
 
 			uid        string
-			cookieName string
+			cookieName = h.cfg.API.AuthCookieName
 		)
 
 		defer func() {
@@ -42,12 +42,6 @@ func (h *ArtemisHandler) Authenticate(n httprouter.Handle, mode string) httprout
 
 			n(w, r, ps)
 		}()
-
-		if mode == "adm" {
-			cookieName = h.cfg.API.AdminAuthCookieName
-		} else {
-			cookieName = h.cfg.API.StudentAuthCookieName
-		}
 
 		cookie, err := r.Cookie(cookieName)
 		if err != nil {
@@ -66,6 +60,6 @@ func (h *ArtemisHandler) Authenticate(n httprouter.Handle, mode string) httprout
 			return
 		}
 
-		ps = append(ps, httprouter.Param{Key: "uid", Value: uid}, httprouter.Param{Key: "sid", Value: sid}, httprouter.Param{Key: "cookieName", Value: cookieName})
+		ps = append(ps, httprouter.Param{Key: "uid", Value: uid}, httprouter.Param{Key: "sid", Value: sid})
 	}
 }
