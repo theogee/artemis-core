@@ -12,7 +12,7 @@ import (
 func (h *ArtemisHandler) Authenticate(n httprouter.Handle) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		var (
-			logPrefix = "[artemis.ArtemisHandler.AuthenticateAdmin]"
+			logPrefix = "[artemis.ArtemisHandler.Authenticate]"
 			log       = logger.Log
 
 			statusCode = http.StatusUnauthorized
