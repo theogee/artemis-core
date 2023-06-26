@@ -39,7 +39,7 @@ response
     servError: []string
     data: RegisterAsAdminResponse {
         errMessage: []string
-        Message: []string
+        message: []string
     }
 }
 ```
@@ -47,9 +47,7 @@ response
 ### Logout (common)
 
 ```
-endpoint:
-  - /api/adm/logout
-  - /api/st/logout (to be implemented)
+endpoint: /api/logout
 cookie: artemis.sid
 request
 {}
@@ -60,7 +58,57 @@ response
     servError: []string
     data: LogoutResponse {
         errMessage: []string
-        Message: []string
+        message: []string
+    }
+}
+```
+
+### GetMeta
+
+```
+endpoint: /api/meta
+cookie: artemis.sid
+request
+{}
+
+response
+{
+    success: bool
+    servError: []string
+    data: GetMetaResponse {
+        userType string
+    }
+}
+```
+
+### GetStudents
+
+```
+** to be implemented
+endpoint: /api/students
+cookie: artemis.sid
+request
+{}
+
+response
+{
+    success: bool
+    servError: []string
+    data: GetStudentsResponse {
+        errMessage: []string
+        message: []string
+        students: [
+            student {
+                studentID uint32
+                givenName string
+                surname   string
+                SGUMajor  string
+                SGUEmail  string
+                MobileDE  string
+                MobileID  string
+            },
+            ...
+        ]
     }
 }
 ```

@@ -68,4 +68,8 @@ type (
 		ErrMessage []string `json:"errMessage,omitempty"`
 		Message    []string `json:"message,omitempty"`
 	}
+
+	GetMetaResponse struct {
+		UserType string `json:"userType,omitempty"`
+	}
 )

@@ -12,4 +12,5 @@ func registerRoutes(cfg *config.Config, router *httprouter.Router, artemisHandle
 
 	// protected routes
 	router.POST("/api/logout", artemisHandler.Authenticate(artemisHandler.Logout))
+	router.POST("/api/meta", artemisHandler.Authenticate(artemisHandler.GetMeta))
 }
