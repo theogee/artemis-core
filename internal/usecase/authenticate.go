@@ -12,7 +12,7 @@ func (u *ArtemisUsecase) Authenticate(sid string) (string, error) {
 		logPrefix = "[artemis.ArtemisUsecase.Authenticate]"
 		log       = logger.Log
 
-		c *model.UserCache
+		c = &model.UserCache{}
 	)
 
 	cstr, err := u.artemisRepo.GetCache(sid)
