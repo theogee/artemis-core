@@ -78,4 +78,9 @@ type (
 		City        sql.NullString `db:"city" json:"city"`
 		Postcode    sql.NullInt16  `db:"postcode" json:"postcode"`
 	}
+
+	UserCache struct {
+		UID      string `json:"uid"`
+		UserType string `josn:"userType"`
+	}
 )
