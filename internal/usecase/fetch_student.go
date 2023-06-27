@@ -13,9 +13,7 @@ func (u *ArtemisUsecase) GetStudents(data *model.GetStudentsRequest) ([]*model.S
 		students []*model.StudentSimple
 	)
 
-	offset := (data.Page - 1) * data.Limit
-
-	studentsDB, err := u.artemisRepo.GetStudents(data.Limit, offset)
+	studentsDB, err := u.artemisRepo.GetStudents(data)
 	if err != nil {
 		log.Printf("%v error calling artemisRepo.GetStudents. err: %v", logPrefix, err)
 		return nil, err
@@ -31,11 +29,12 @@ func (u *ArtemisUsecase) GetStudents(data *model.GetStudentsRequest) ([]*model.S
 		}
 
 		student := &model.StudentSimple{
-			StudentID:   s.StudentID,
-			Name:        s.GivenName + " " + s.Surname.String,
-			SGUMajor:    s.SGUMajor,
-			SGUEmail:    s.SGUEmail.String,
-			MobilePhone: mobilePhone,
+			StudentID:    s.StudentID,
+			Name:         s.GivenName + " " + s.Surname.String,
+			SGUMajor:     s.SGUMajor,
+			SGUEmail:     s.SGUEmail.String,
+			MobilePhone:  mobilePhone,
+			ExchangeYear: s.ExchangeYear.Int16,
 		}
 
 		students = append(students, student)

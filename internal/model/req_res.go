@@ -75,8 +75,12 @@ type (
 	}
 
 	GetStudentsRequest struct {
-		Limit int64 `json:"limit"`
-		Page  int64 `josn:"page"`
+		Limit        int64
+		Page         int64
+		SGUMajorID   int64
+		ExchangeYear int64
+		StudentID    int64
+		Name         string
 	}
 
 	GetStudentsResponse struct {
@@ -90,6 +94,7 @@ type (
 		SGUMajor  string `json:"sguMajor"`
 		SGUEmail  string `json:"sguEmail"`
 		// set to +62 if +49 is not available
-		MobilePhone string `json:"mobilePhone"`
+		MobilePhone  string `json:"mobilePhone"`
+		ExchangeYear int16  `json:"exchangeYear"`
 	}
 )

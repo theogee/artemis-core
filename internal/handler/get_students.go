@@ -83,7 +83,7 @@ func (h *ArtemisHandler) GetStudents(w http.ResponseWriter, r *http.Request, ps 
 			d.ErrMessage = append(d.ErrMessage, "page must be a valid number")
 		} else {
 			if page <= 0 {
-				log.Printf("%v error page must not be greater than 0", logPrefix)
+				log.Printf("%v error page must be greater than 0", logPrefix)
 				d.ErrMessage = append(d.ErrMessage, "page must be greater than 0")
 			}
 
@@ -92,6 +92,42 @@ func (h *ArtemisHandler) GetStudents(w http.ResponseWriter, r *http.Request, ps 
 	} else {
 		data.Page = 1
 	}
+
+	SGUMajorIDStr := q.Get("SGUMajorID")
+	if SGUMajorIDStr != "" {
+		SGUMajorID, err := strconv.ParseInt(SGUMajorIDStr, 10, 64)
+		if err != nil {
+			log.Printf("%v error SGUMajorID must be a valid number. err: %v", logPrefix, err)
+			d.ErrMessage = append(d.ErrMessage, "SGUMajorID must be a valid number")
+		} else {
+			data.SGUMajorID = SGUMajorID
+		}
+	}
+
+	exchangeYearStr := q.Get("exchangeYear")
+	if exchangeYearStr != "" {
+		exchangeYear, err := strconv.ParseInt(exchangeYearStr, 10, 64)
+		if err != nil {
+			log.Printf("%v error exchangeYear must be a valid number. err: %v", logPrefix, err)
+			d.ErrMessage = append(d.ErrMessage, "exchangeYear must be a valid number")
+		} else {
+			data.ExchangeYear = exchangeYear
+		}
+	}
+
+	studentIDStr := q.Get("studentID")
+	if studentIDStr != "" {
+		studentID, err := strconv.ParseInt(studentIDStr, 10, 64)
+		if err != nil {
+			log.Printf("%v error studentID must be a valid number. err: %v", logPrefix, err)
+			d.ErrMessage = append(d.ErrMessage, "studentID must be a valid number")
+		} else {
+			data.StudentID = studentID
+		}
+	}
+
+	name := q.Get("name")
+	data.Name = name
 
 	if len(d.ErrMessage) != 0 {
 		return
