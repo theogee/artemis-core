@@ -11,6 +11,7 @@ const (
 
 const (
 	UnauthorizedAccess = "unauthorized access"
+	ForbiddenAccess    = "forbidden access"
 )
 
 const (
@@ -71,5 +72,24 @@ type (
 
 	GetMetaResponse struct {
 		UserType string `json:"userType,omitempty"`
+	}
+
+	GetStudentsRequest struct {
+		Limit int64 `json:"limit"`
+		Page  int64 `josn:"page"`
+	}
+
+	GetStudentsResponse struct {
+		ErrMessage []string         `json:"errMessage,omitempty"`
+		Students   []*StudentSimple `json:"students"`
+	}
+
+	StudentSimple struct {
+		StudentID uint32 `json:"studentID"`
+		Name      string `json:"name"`
+		SGUMajor  string `json:"sguMajor"`
+		SGUEmail  string `json:"sguEmail"`
+		// set to +62 if +49 is not available
+		MobilePhone string `json:"mobilePhone"`
 	}
 )

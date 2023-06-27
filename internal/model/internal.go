@@ -21,13 +21,18 @@ var (
 	}
 )
 
+const (
+	UserTypeStudent = "student"
+	UserTypeAdmin   = "admin"
+)
+
 type (
 	Student struct {
 		GivenName                 string         `csv:"given_name" db:"given_name"`
 		Surname                   sql.NullString `csv:"surname" db:"surname"`
 		Gender                    sql.NullString `csv:"gender" db:"gender"`
 		SGUMajorID                uint32         `db:"sgu_major_id"`
-		SGUMajor                  string         `csv:"sgu_major"`
+		SGUMajor                  string         `csv:"sgu_major" db:"sgu_major"`
 		FHDepartmentID            uint32         `db:"fh_department_id"`
 		FHDepartment              string         `csv:"fh_department"`
 		StudentID                 uint32         `csv:"student_id" db:"student_id"`

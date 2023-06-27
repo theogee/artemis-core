@@ -84,11 +84,13 @@ response
 ### GetStudents
 
 ```
-** to be implemented
 endpoint: /api/students
 cookie: artemis.sid
 request
-{}
+{
+    limit int64 DEFAULT 20
+    page int64 DEFAULT 1
+}
 
 response
 {

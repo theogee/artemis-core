@@ -28,3 +28,25 @@ func (r *ArtemisRepo) GetStudentByUsername(username string) (*model.Student, err
 
 	return &student, nil
 }
+
+func (r *ArtemisRepo) GetStudents(limit, offset int64) ([]*model.Student, error) {
+	var (
+		logPrefix = "[artemis.ArtemisRepo.GetStudents]"
+		log       = logger.Log
+
+		students []*model.Student
+	)
+
+	err := r.db.Conn.Select(&students, GetStudentsQuery, limit, offset)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			log.Printf("%v error there is no data in students table. err: %v", logPrefix, err)
+			return students, nil
+		}
+
+		log.Printf("%v error fetching data from database. err: %v", logPrefix, err)
+		return nil, err
+	}
+
+	return students, nil
+}

@@ -1,0 +1,45 @@
+package artemis
+
+import (
+	"github.com/theogee/artemis-core/internal/model"
+	"github.com/theogee/artemis-core/pkg/logger"
+)
+
+func (u *ArtemisUsecase) GetStudents(data *model.GetStudentsRequest) ([]*model.StudentSimple, error) {
+	var (
+		logPrefix = "[artemis.ArtemisUsecase.GetStudents]"
+		log       = logger.Log
+
+		students []*model.StudentSimple
+	)
+
+	offset := (data.Page - 1) * data.Limit
+
+	studentsDB, err := u.artemisRepo.GetStudents(data.Limit, offset)
+	if err != nil {
+		log.Printf("%v error calling artemisRepo.GetStudents. err: %v", logPrefix, err)
+		return nil, err
+	}
+
+	var mobilePhone string
+	for _, s := range studentsDB {
+		// TODO: make sure to sanitize mobile phone when inserting data to db, otherwise s[1:] operation will panic!
+		if s.MobilePhoneDE.String != "" {
+			mobilePhone = "+49 " + s.MobilePhoneDE.String[1:]
+		} else {
+			mobilePhone = "+62 " + s.MobilePhone.String[1:]
+		}
+
+		student := &model.StudentSimple{
+			StudentID:   s.StudentID,
+			Name:        s.GivenName + " " + s.Surname.String,
+			SGUMajor:    s.SGUMajor,
+			SGUEmail:    s.SGUEmail.String,
+			MobilePhone: mobilePhone,
+		}
+
+		students = append(students, student)
+	}
+
+	return students, nil
+}
