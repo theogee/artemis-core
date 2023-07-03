@@ -30,7 +30,7 @@ func (r *ArtemisRepo) GetStudentByUsername(username string) (*model.Student, err
 	return &student, nil
 }
 
-func (r *ArtemisRepo) GetStudents(data *model.GetStudentsRequest) ([]*model.Student, error) {
+func (r *ArtemisRepo) GetStudents(data *model.GetStudentsRequest) ([]*model.Student, int, error) {
 	var (
 		logPrefix = "[artemis.ArtemisRepo.GetStudents]"
 		log       = logger.Log
@@ -42,47 +42,64 @@ func (r *ArtemisRepo) GetStudents(data *model.GetStudentsRequest) ([]*model.Stud
 		offset = (data.Page - 1) * data.Limit
 
 		count = 1
+
+		studentCount = 0
 	)
 
 	q := GetStudentsQuery
+	qc := GetStudentsCountQuery
 
 	if data.Name != "" {
-		q += fmt.Sprintf(" AND CONCAT(s.given_name, ' ', s.surname) ILIKE $%v", count)
+		tmp := fmt.Sprintf(" AND CONCAT(s.given_name, ' ', s.surname) ILIKE $%v", count)
+		q += tmp
+		qc += tmp
 		args = append(args, "%"+data.Name+"%")
 		count++
 	}
 
 	if data.ExchangeYear != 0 {
-		q += fmt.Sprintf(" AND s.exchange_year = $%v", count)
+		tmp := fmt.Sprintf(" AND s.exchange_year = $%v", count)
+		q += tmp
+		qc += tmp
 		args = append(args, data.ExchangeYear)
 		count++
 	}
 
 	if data.SGUMajorID != 0 {
-		q += fmt.Sprintf(" AND s.sgu_major_id = $%v", count)
+		tmp := fmt.Sprintf(" AND s.sgu_major_id = $%v", count)
+		q += tmp
+		qc += tmp
 		args = append(args, data.SGUMajorID)
 		count++
 	}
 
 	if data.StudentID != 0 {
-		q += fmt.Sprintf(" AND s.student_id = $%v", count)
+		tmp := fmt.Sprintf(" AND s.student_id = $%v", count)
+		q += tmp
+		qc += tmp
 		args = append(args, data.StudentID)
 		count++
+	}
+
+	err := r.db.Conn.QueryRowx(qc, args...).Scan(&studentCount)
+	if err != nil {
+		log.Printf("%v error fetching count data from database. err: %v", logPrefix, err)
+		return nil, -1, err
 	}
 
 	q += fmt.Sprintf(" LIMIT $%v OFFSET $%v", count, count+1)
 	args = append(args, data.Limit, offset)
 
-	err := r.db.Conn.Select(&students, q, args...)
+	err = r.db.Conn.Select(&students, q, args...)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			log.Printf("%v error there is no data in students table. err: %v", logPrefix, err)
-			return students, nil
+			return students, -1, nil
 		}
 
 		log.Printf("%v error fetching data from database. err: %v", logPrefix, err)
-		return nil, err
+		return nil, -1, err
 	}
 
-	return students, nil
+	return students, studentCount, nil
 }

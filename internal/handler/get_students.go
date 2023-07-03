@@ -132,8 +132,9 @@ func (h *ArtemisHandler) GetStudents(w http.ResponseWriter, r *http.Request, ps 
 	if len(d.ErrMessage) != 0 {
 		return
 	}
-
-	students, err := h.artemisUsecase.GetStudents(data)
+	// students are limited by pagination
+	// studentCount return the total amount of student who fulfills the filter
+	students, studentCount, err := h.artemisUsecase.GetStudents(data)
 	if err != nil {
 		log.Printf("%v error calling artemisUsecase.GetStudents. err: %v", logPrefix, err)
 		statusCode = http.StatusInternalServerError
@@ -142,6 +143,7 @@ func (h *ArtemisHandler) GetStudents(w http.ResponseWriter, r *http.Request, ps 
 	}
 
 	d.Students = students
+	d.TotalStudent = studentCount
 	statusCode = http.StatusOK
 	resp.Success = true
 }

@@ -29,4 +29,10 @@ const (
 		FROM students s, sgu_majors m
 		WHERE s.sgu_major_id = m.major_id
 	`
+
+	GetStudentsCountQuery = `
+		SELECT COUNT(student_id)
+		FROM students s
+		WHERE 1 = 1
+	`
 )

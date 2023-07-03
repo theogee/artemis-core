@@ -5,7 +5,7 @@ import (
 	"github.com/theogee/artemis-core/pkg/logger"
 )
 
-func (u *ArtemisUsecase) GetStudents(data *model.GetStudentsRequest) ([]*model.StudentSimple, error) {
+func (u *ArtemisUsecase) GetStudents(data *model.GetStudentsRequest) ([]*model.StudentSimple, int, error) {
 	var (
 		logPrefix = "[artemis.ArtemisUsecase.GetStudents]"
 		log       = logger.Log
@@ -13,10 +13,10 @@ func (u *ArtemisUsecase) GetStudents(data *model.GetStudentsRequest) ([]*model.S
 		students []*model.StudentSimple
 	)
 
-	studentsDB, err := u.artemisRepo.GetStudents(data)
+	studentsDB, studentCount, err := u.artemisRepo.GetStudents(data)
 	if err != nil {
 		log.Printf("%v error calling artemisRepo.GetStudents. err: %v", logPrefix, err)
-		return nil, err
+		return nil, -1, err
 	}
 
 	var mobilePhone string
@@ -40,5 +40,5 @@ func (u *ArtemisUsecase) GetStudents(data *model.GetStudentsRequest) ([]*model.S
 		students = append(students, student)
 	}
 
-	return students, nil
+	return students, studentCount, nil
 }

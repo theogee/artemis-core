@@ -84,8 +84,9 @@ type (
 	}
 
 	GetStudentsResponse struct {
-		ErrMessage []string         `json:"errMessage,omitempty"`
-		Students   []*StudentSimple `json:"students"`
+		ErrMessage   []string         `json:"errMessage,omitempty"`
+		Students     []*StudentSimple `json:"students"`
+		TotalStudent int              `json:"totalStudent,omitempty"`
 	}
 
 	StudentSimple struct {
