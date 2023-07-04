@@ -98,4 +98,10 @@ type (
 		MobilePhone  string `json:"mobilePhone"`
 		ExchangeYear int16  `json:"exchangeYear"`
 	}
+
+	GetSGUMajorsResponse struct {
+		ErrMessage []string    `json:"errMessage,omitempty"`
+		Message    []string    `json:"message,omitempty"`
+		Majors     []*SGUMajor `json:"majors"`
+	}
 )

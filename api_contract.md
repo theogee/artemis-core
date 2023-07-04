@@ -114,3 +114,30 @@ response
     }
 }
 ```
+
+### GetSGUMajors
+
+```
+endpoint: /api/sgu_majors
+cookie: artemis.sid
+request
+{}
+
+response
+{
+    success: bool
+    servError: []string
+    data: GetSGUMajorsResponse {
+        errMessage: []string
+        message: []string
+        majors: [
+            SGUMajor {
+                majorID int
+                majorName string
+                majorCode string
+            },
+            ...
+        ]
+    }
+}
+```

@@ -35,4 +35,9 @@ const (
 		FROM students s
 		WHERE 1 = 1
 	`
+
+	GetSGUMajorsQuery = `
+		SELECT major_id, major_name, major_code
+		FROM sgu_majors
+	`
 )
