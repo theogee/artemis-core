@@ -141,3 +141,27 @@ response
     }
 }
 ```
+
+### GetExchangeYear
+
+```
+endpoint: /api/exchange_year
+cookie: artemis.sid
+request
+{}
+
+response
+{
+    success: bool
+    servError: []string
+    data: GetExchangeYearResponse {
+        errMessage: []string
+        message: []string
+        exchange_year: [
+            2023,
+            2024,
+            ...
+        ]
+    }
+}
+```

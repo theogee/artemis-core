@@ -40,4 +40,10 @@ const (
 		SELECT major_id, major_name, major_code
 		FROM sgu_majors
 	`
+
+	GetExchangeYearQuery = `
+		SELECT exchange_year
+		FROM students
+		GROUP BY exchange_year
+	`
 )

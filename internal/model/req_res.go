@@ -104,4 +104,10 @@ type (
 		Message    []string    `json:"message,omitempty"`
 		Majors     []*SGUMajor `json:"majors"`
 	}
+
+	GetExchangeYearResponse struct {
+		ErrMessage   []string `json:"errMessage,omitempty"`
+		Message      []string `json:"message,omitempty"`
+		ExchangeYear []int    `json:"exchangeYear"`
+	}
 )

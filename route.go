@@ -17,4 +17,6 @@ func registerRoutes(cfg *config.Config, router *httprouter.Router, artemisHandle
 	router.GET("/api/students", artemisHandler.Authenticate(artemisHandler.GetStudents))
 
 	router.GET("/api/sgu_majors", artemisHandler.Authenticate(artemisHandler.GetSGUMajors))
+
+	router.GET("/api/exchange_year", artemisHandler.Authenticate(artemisHandler.GetExchangeYear))
 }
