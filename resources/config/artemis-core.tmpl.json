@@ -18,7 +18,7 @@
         "db": 0
     },
     "api": {
-        "admin_auth_session_expiration": 180,
-        "admin_auth_cookie_name": "artemis.sid"
+        "auth_session_expiration": 600,
+        "auth_cookie_name": "artemis.sid"
     }
 }
