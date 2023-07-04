@@ -157,7 +157,7 @@ response
     data: GetExchangeYearResponse {
         errMessage: []string
         message: []string
-        exchange_year: [
+        exchangeYear: [
             2023,
             2024,
             ...
