@@ -53,7 +53,7 @@ func (r *ArtemisRepo) GetStudents(data *model.GetStudentsRequest) ([]*model.Stud
 		tmp := fmt.Sprintf(" AND CONCAT(s.given_name, ' ', s.surname) ILIKE $%v", count)
 		q += tmp
 		qc += tmp
-		args = append(args, "%"+data.Name+"%")
+		args = append(args, data.Name+"%")
 		count++
 	}
 
