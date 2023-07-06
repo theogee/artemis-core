@@ -73,6 +73,31 @@ type (
 		ExchangeYear              sql.NullInt16  `db:"exchange_year"`
 	}
 
+	StudentCSV struct {
+		GivenName      string `csv:"given_name" db:"given_name"`
+		Surname        string `csv:"surname" db:"surname"`
+		Gender         string `csv:"gender" db:"gender"`
+		SGUMajorID     uint32 `db:"sgu_major_id"`
+		SGUMajor       string `csv:"sgu_major" db:"sgu_major"`
+		FHDepartmentID uint32 `db:"fh_department_id"`
+		FHDepartment   string `csv:"fh_department"`
+		StudentID      uint32 `csv:"student_id" db:"student_id"`
+		DateOfBirth    string `csv:"date_of_birth" db:"date_of_birth"`
+		CityOfBirth    string `csv:"city_of_birth" db:"city_of_birth"`
+		PassportNumber string `csv:"passport_number" db:"passport_number"`
+		DateOfIssue    string `csv:"date_of_issue" db:"date_of_issue"`
+		DateOfExpiry   string `csv:"date_of_expiry" db:"date_of_expiry"`
+		IssuingOffice  string `csv:"issuing_office" db:"issuing_office"`
+		PrivateEmail   string `csv:"private_email" db:"private_email"`
+		SGUEmail       string `csv:"sgu_email" db:"sgu_email"`
+		Username       string `csv:"username" db:"username"`
+		Password       string `csv:"password" db:"password"`
+		FHEmail        string `csv:"fh_email" db:"fh_email"`
+		IBAN           string `csv:"iban" db:"iban"`
+		MobilePhone    string `csv:"mobile_phone" db:"mobile_phone"`
+		MobilePhoneDE  string `csv:"mobile_phone_de" db:"mobile_phone_de"`
+	}
+
 	Admin struct {
 		AdminID     uint32         `db:"admin_id" json:"admin_id"`
 		Username    string         `db:"username" json:"username"`

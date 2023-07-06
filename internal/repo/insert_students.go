@@ -8,7 +8,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-func (r *ArtemisRepo) InsertStudents(students []*model.Student) error {
+func (r *ArtemisRepo) InsertStudents(students []*model.StudentCSV) error {
 	var (
 		logPrefix = "[artemis.ArtemisRepo.InsertStudents]"
 		log       = logger.Log

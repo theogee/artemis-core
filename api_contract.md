@@ -165,3 +165,25 @@ response
     }
 }
 ```
+
+### RegisterStudentByCSV
+
+```
+endpoint: /api/register_student_by_csv
+cookie: artemis.sid
+request
+content-type: multipart/form-data
+{
+    file CSVFile
+}
+
+response
+{
+    success: bool
+    servError: []string
+    data: RegisterStudentByCSV {
+        errMessage: []string
+        message: []string
+    }
+}
+```

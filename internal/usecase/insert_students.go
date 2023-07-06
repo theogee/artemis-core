@@ -5,7 +5,7 @@ import (
 	"github.com/theogee/artemis-core/pkg/logger"
 )
 
-func (u *ArtemisUsecase) InsertStudents(students []*model.Student) error {
+func (u *ArtemisUsecase) InsertStudents(students []*model.StudentCSV) error {
 	var (
 		logPrefix = "[artemis.ArtemisUsecase.InsertStudents]"
 		log       = logger.Log

@@ -110,4 +110,9 @@ type (
 		Message      []string `json:"message,omitempty"`
 		ExchangeYear []int    `json:"exchangeYear"`
 	}
+
+	RegisterStudentByCSV struct {
+		ErrMessage []string `json:"errMessage,omitempty"`
+		Message    []string `json:"message,omitempty"`
+	}
 )
