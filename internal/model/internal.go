@@ -90,8 +90,8 @@ type (
 	}
 
 	SGUMajor struct {
-		MajorID   int    `db:"major_id" json:"major_id"`
-		MajorName string `db:"major_name" json:"major_name"`
-		MajorCode string `db:"major_code" json:"major_code"`
+		MajorID   int    `db:"major_id" json:"majorID"`
+		MajorName string `db:"major_name" json:"majorName"`
+		MajorCode string `db:"major_code" json:"majorCode"`
 	}
 )
