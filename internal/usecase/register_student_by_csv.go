@@ -6,7 +6,7 @@ import (
 	"github.com/theogee/artemis-core/pkg/logger"
 )
 
-func (u *ArtemisUsecase) RegisterStudentByCSV(file multipart.File, header *multipart.FileHeader) error {
+func (u *ArtemisUsecase) RegisterStudentByCSV(file multipart.File, header *multipart.FileHeader, exchangeYear int64) error {
 	var (
 		logPrefix = "[artemis.ArtemisUsecase.RegisterStudentByCSV]"
 		log       = logger.Log
@@ -27,7 +27,7 @@ func (u *ArtemisUsecase) RegisterStudentByCSV(file multipart.File, header *multi
 		return err
 	}
 
-	err = u.artemisRepo.InsertStudents(data)
+	err = u.artemisRepo.InsertStudents(data, exchangeYear)
 	if err != nil {
 		log.Printf("%v error calling artemisRepo.InsertStudents. err: %v", logPrefix, err)
 		return err

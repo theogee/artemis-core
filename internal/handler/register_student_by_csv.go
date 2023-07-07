@@ -3,6 +3,7 @@ package artemis
 import (
 	"net/http"
 	"path/filepath"
+	"strconv"
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/theogee/artemis-core/internal/model"
@@ -66,7 +67,23 @@ func (h *ArtemisHandler) RegisterStudentByCSV(w http.ResponseWriter, r *http.Req
 		return
 	}
 
-	err = h.artemisUsecase.RegisterStudentByCSV(file, header)
+	exchangeYearStr := r.FormValue("exchangeYear")
+	exchangeYear, err := strconv.ParseInt(exchangeYearStr, 10, 64)
+	if err != nil {
+		log.Printf("%v error exchangeYear must be a valid number. err: %v", logPrefix, err)
+		d.ErrMessage = append(d.ErrMessage, "exchangeYear must be a valid number")
+		statusCode = http.StatusBadRequest
+		return
+	}
+
+	if exchangeYear <= 2000 || exchangeYear > 2900 {
+		log.Printf("%v error exchangeYear value is outside the boundary", logPrefix)
+		d.ErrMessage = append(d.ErrMessage, "exchangeYear value is outside the boundary")
+		statusCode = http.StatusBadRequest
+		return
+	}
+
+	err = h.artemisUsecase.RegisterStudentByCSV(file, header, exchangeYear)
 	if err != nil {
 		log.Printf("%v error calling artemisUsecase.RegisterStudentByCSV. err: %v", logPrefix, err)
 		resp.ServError = append(resp.ServError, err.Error())

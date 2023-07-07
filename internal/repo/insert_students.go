@@ -8,7 +8,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-func (r *ArtemisRepo) InsertStudents(students []*model.StudentCSV) error {
+func (r *ArtemisRepo) InsertStudents(students []*model.StudentCSV, exchangeYear int64) error {
 	var (
 		logPrefix = "[artemis.ArtemisRepo.InsertStudents]"
 		log       = logger.Log
@@ -36,7 +36,7 @@ func (r *ArtemisRepo) InsertStudents(students []*model.StudentCSV) error {
 		SGUMajorID := model.SGUMajors[s.SGUMajor]
 		FHDepartmentID := model.FHDepartments[s.FHDepartment]
 
-		q += fmt.Sprintf("('%v','%v','%v','%v','%v',%v,'%v','%v','%v','%v','%v','%v','%v','%v','%v','%v','%v','%v','%v','%v')", s.GivenName, s.Surname, s.Gender, SGUMajorID, FHDepartmentID, s.StudentID, s.DateOfBirth, s.CityOfBirth, s.PassportNumber, s.DateOfIssue, s.DateOfExpiry, s.IssuingOffice, s.PrivateEmail, s.SGUEmail, s.Username, string(hashPwd), s.FHEmail, s.IBAN, s.MobilePhone, s.MobilePhoneDE)
+		q += fmt.Sprintf("('%v','%v','%v','%v','%v',%v,'%v','%v','%v','%v','%v','%v','%v','%v','%v','%v','%v','%v','%v','%v', '%v')", s.GivenName, s.Surname, s.Gender, SGUMajorID, FHDepartmentID, s.StudentID, s.DateOfBirth, s.CityOfBirth, s.PassportNumber, s.DateOfIssue, s.DateOfExpiry, s.IssuingOffice, s.PrivateEmail, s.SGUEmail, s.Username, string(hashPwd), s.FHEmail, s.IBAN, s.MobilePhone, s.MobilePhoneDE, exchangeYear)
 
 		if i != len(students)-1 {
 			q += ","
