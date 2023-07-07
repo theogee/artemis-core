@@ -29,12 +29,12 @@ func (h *ArtemisHandler) Authenticate(n httprouter.Handle) httprouter.Handle {
 
 			cookies = []*http.Cookie{}
 
-			uid        string
+			c          *model.UserCache
 			cookieName = h.cfg.API.AuthCookieName
 		)
 
 		defer func() {
-			if uid == "" {
+			if c == nil {
 				resp.Data = d
 				utilHTTP.SendJSON(w, cookies, resp, statusCode)
 				return
@@ -52,7 +52,7 @@ func (h *ArtemisHandler) Authenticate(n httprouter.Handle) httprouter.Handle {
 
 		sid := cookie.Value
 
-		uid, err = h.artemisUsecase.Authenticate(sid)
+		c, err = h.artemisUsecase.Authenticate(sid)
 		if err != nil {
 			log.Printf("%v error calling artemisUsecase.Authenticate. err: %v", logPrefix, err)
 			resp.ServError = append(resp.ServError, err.Error())
@@ -60,6 +60,50 @@ func (h *ArtemisHandler) Authenticate(n httprouter.Handle) httprouter.Handle {
 			return
 		}
 
-		ps = append(ps, httprouter.Param{Key: "uid", Value: uid}, httprouter.Param{Key: "sid", Value: sid})
+		ps = append(ps, httprouter.Param{Key: "uid", Value: c.UID}, httprouter.Param{Key: "sid", Value: sid}, httprouter.Param{Key: "userType", Value: c.UserType})
+	}
+}
+
+func (h *ArtemisHandler) Authorize(n httprouter.Handle, authorizedType string) httprouter.Handle {
+	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+		var (
+			logPrefix = "[artemis.ArtemisHandler.Authorize]"
+			log       = logger.Log
+
+			statusCode = http.StatusForbidden
+
+			resp = &model.DefaultResponse{
+				Success:   false,
+				ServError: []string{},
+			}
+
+			d = &model.AuthorizeResponse{
+				ErrMessage: []string{},
+				Message:    []string{},
+			}
+
+			userType string
+
+			cookies = []*http.Cookie{}
+		)
+
+		defer func() {
+			if userType != authorizedType {
+				resp.Data = d
+				utilHTTP.SendJSON(w, cookies, resp, statusCode)
+				return
+			}
+
+			n(w, r, ps)
+		}()
+
+		userType = ps.ByName("userType")
+		if userType != authorizedType {
+			log.Printf("%v unauthorized attempt to access resource. uid: %v. api: %v", logPrefix, ps.ByName("uid"), r.URL.Path)
+			d.ErrMessage = append(d.ErrMessage, "error unauthorized access")
+			return
+		}
+
+		n(w, r, ps)
 	}
 }

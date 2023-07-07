@@ -65,6 +65,11 @@ type (
 		Message    []string `json:"message,omitempty"`
 	}
 
+	AuthorizeResponse struct {
+		ErrMessage []string `json:"errMessage,omitempty"`
+		Message    []string `json:"message,omitempty"`
+	}
+
 	LogoutResponse struct {
 		ErrMessage []string `json:"errMessage,omitempty"`
 		Message    []string `json:"message,omitempty"`

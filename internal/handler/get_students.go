@@ -37,23 +37,25 @@ func (h *ArtemisHandler) GetStudents(w http.ResponseWriter, r *http.Request, ps 
 		utilsHTTP.SendJSON(w, cookies, resp, statusCode)
 	}()
 
+	// deprecated: authorize middleware has been implemented
+
 	// only admin can fetch student data
-	sid := ps.ByName("sid")
+	// sid := ps.ByName("sid")
 
-	c, err := h.artemisUsecase.GetUserCache(sid)
-	if err != nil {
-		log.Printf("%v error calling artemisUsecase.GetUserCache. err: %v", logPrefix, err)
-		statusCode = http.StatusInternalServerError
-		resp.ServError = append(resp.ServError, err.Error())
-		return
-	}
+	// c, err := h.artemisUsecase.GetUserCache(sid)
+	// if err != nil {
+	// 	log.Printf("%v error calling artemisUsecase.GetUserCache. err: %v", logPrefix, err)
+	// 	statusCode = http.StatusInternalServerError
+	// 	resp.ServError = append(resp.ServError, err.Error())
+	// 	return
+	// }
 
-	if c.UserType != model.UserTypeAdmin {
-		log.Printf("%v error received request from non-admin user. UID: %v", logPrefix, c.UID)
-		statusCode = http.StatusForbidden
-		d.ErrMessage = append(d.ErrMessage, model.ForbiddenAccess)
-		return
-	}
+	// if c.UserType != model.UserTypeAdmin {
+	// 	log.Printf("%v error received request from non-admin user. UID: %v", logPrefix, c.UID)
+	// 	statusCode = http.StatusForbidden
+	// 	d.ErrMessage = append(d.ErrMessage, model.ForbiddenAccess)
+	// 	return
+	// }
 
 	q := r.URL.Query()
 
