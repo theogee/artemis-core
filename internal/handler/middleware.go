@@ -103,7 +103,5 @@ func (h *ArtemisHandler) Authorize(n httprouter.Handle, authorizedType string) h
 			d.ErrMessage = append(d.ErrMessage, "error unauthorized access")
 			return
 		}
-
-		n(w, r, ps)
 	}
 }
