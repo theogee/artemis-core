@@ -103,3 +103,25 @@ func (r *ArtemisRepo) GetStudents(data *model.GetStudentsRequest) ([]*model.Stud
 
 	return students, studentCount, nil
 }
+
+func (r *ArtemisRepo) GetStudentByID(studentID int64) (*model.Student, error) {
+	var (
+		logPrefix = "[artemis.ArtemisRepo.GetStudentByID]"
+		log       = logger.Log
+
+		student model.Student
+	)
+
+	err := r.db.Conn.QueryRowx(GetStudentByIDQuery, studentID).StructScan(&student)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			log.Printf("%v error student with the studentID: %v can't be found. err: %v", logPrefix, studentID, err)
+			return nil, nil
+		}
+
+		log.Printf("%v error fetching data from database. err: %v", logPrefix, err)
+		return nil, err
+	}
+
+	return &student, nil
+}

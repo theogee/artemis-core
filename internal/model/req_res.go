@@ -120,4 +120,45 @@ type (
 		ErrMessage []string `json:"errMessage,omitempty"`
 		Message    []string `json:"message,omitempty"`
 	}
+
+	GetStudentByIDResponse struct {
+		ErrMessage []string       `json:"errMessage,omitempty"`
+		Student    *StudentDetail `json:"studentData,omitempty"`
+	}
+
+	StudentDetail struct {
+		GivenName                 string `json:"givenName"`
+		Surname                   string `json:"surname"`
+		Gender                    string `json:"gender"`
+		SGUMajor                  string `json:"sguMajor"`
+		FHDepartment              string `json:"fhDepartment"`
+		StudentID                 uint32 `json:"studentID"`
+		DateOfBirth               string `json:"dateOfBirth"`
+		CityOfBirth               string `json:"cityOfBirth"`
+		PassportNumber            string `json:"passportNumber"`
+		DateOfIssue               string `json:"dateOfIssue"`
+		DateOfExpiry              string `json:"dateOfExpiry"`
+		IssuingOffice             string `json:"issuingOffice"`
+		PrivateEmail              string `json:"privateEmail"`
+		SGUEmail                  string `json:"sguEmail"`
+		Username                  string `json:"username"`
+		FHEmail                   string `json:"fhEmail"`
+		IBAN                      string `json:"iban"`
+		MobilePhone               string `json:"mobilePhone"`
+		MobilePhoneDE             string `json:"mobilePhoneDE"`
+		CurrentAddress            string `json:"currentAddress"`
+		CurrentPostcode           string `json:"currentPostcode"`
+		CurrentCity               string `json:"currentCity"`
+		CoName                    string `json:"coName"`
+		InternshipCompany         string `json:"internshipCompany"`
+		InternshipStartDate       string `json:"internshipStartDate"`
+		InternshipEndDate         string `json:"internshipEndDate"`
+		InternshipCompanyAddress  string `json:"internshipCompanyAddress"`
+		InternshipCompanyPostcode string `json:"internshipCompanyPostcode"`
+		InternshipCompanyCity     string `json:"internshipCompanyCity"`
+		InternshipSupervisorName  string `json:"internshipSupervisorName"`
+		InternshipSupervisorEmail string `json:"internshipSupervisorEmail"`
+		InternshipSupervisorPhone string `json:"internshipSupervisorPhone"`
+		ExchangeYear              int16  `json:"exchangeYear"`
+	}
 )

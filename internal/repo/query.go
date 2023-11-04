@@ -46,4 +46,43 @@ const (
 		FROM students
 		GROUP BY exchange_year
 	`
+
+	GetStudentByIDQuery = `
+		SELECT 
+		s.student_id,
+		s.username,
+		s.gender,
+		s.mobile_phone,
+		s.mobile_phone_de,
+		s.given_name,
+		s.surname,
+		sgu.major_name as sgu_major,
+		fh.department_name as fh_department ,
+		s.private_email,
+		s.sgu_email,
+		s.fh_email,
+		s.iban,
+		s.exchange_year,
+		s.current_address,
+		s.current_postcode,
+		s.current_city,
+		s.co_name,
+		s.date_of_birth,
+		s.city_of_birth,
+		s.passport_number,
+		s.date_of_issue,
+		s.date_of_expiry,
+		s.issuing_office,
+		s.internship_company,
+		s.internship_start_date,
+		s.internship_end_date,
+		s.internship_company_address,
+		s.internship_company_postcode,
+		s.internship_company_city,
+		s.internship_supervisor_name,
+		s.internship_supervisor_email,
+		s.internship_supervisor_phone
+		FROM students s, sgu_majors sgu, fh_departments fh 
+		WHERE s.student_id = $1 AND s.sgu_major_id = sgu.major_id AND fh.department_id = s.fh_department_id
+	`
 )

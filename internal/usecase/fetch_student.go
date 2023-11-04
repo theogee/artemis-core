@@ -42,3 +42,61 @@ func (u *ArtemisUsecase) GetStudents(data *model.GetStudentsRequest) ([]*model.S
 
 	return students, studentCount, nil
 }
+
+func (u *ArtemisUsecase) GetStudentByID(studentID int64) (*model.StudentDetail, error) {
+	var (
+		logPrefix = "[artemis.ArtemisUsecase.GetStudentByID]"
+		log       = logger.Log
+
+		studentDB *model.Student
+		student   *model.StudentDetail
+	)
+
+	studentDB, err := u.artemisRepo.GetStudentByID(studentID)
+	if err != nil {
+		log.Printf("%v error calling artemisRepo.GetStudentByID. err: %v", logPrefix, err)
+		return nil, err
+	}
+
+	if studentDB == nil {
+		return nil, nil
+	}
+
+	student = &model.StudentDetail{
+		GivenName:                 studentDB.GivenName,
+		Surname:                   studentDB.Surname.String,
+		Username:                  studentDB.Username,
+		Gender:                    studentDB.Gender.String,
+		SGUMajor:                  studentDB.SGUMajor,
+		FHDepartment:              studentDB.FHDepartment,
+		StudentID:                 studentDB.StudentID,
+		DateOfBirth:               studentDB.DateOfBirth.String,
+		CityOfBirth:               studentDB.CityOfBirth.String,
+		PassportNumber:            studentDB.PassportNumber.String,
+		DateOfIssue:               studentDB.DateOfIssue.String,
+		DateOfExpiry:              studentDB.DateOfExpiry.String,
+		IssuingOffice:             studentDB.IssuingOffice.String,
+		PrivateEmail:              studentDB.PrivateEmail.String,
+		SGUEmail:                  studentDB.SGUEmail.String,
+		FHEmail:                   studentDB.FHEmail.String,
+		IBAN:                      studentDB.IBAN.String,
+		MobilePhone:               studentDB.MobilePhone.String,
+		MobilePhoneDE:             studentDB.MobilePhoneDE.String,
+		CurrentAddress:            studentDB.CurrentAddress.String,
+		CurrentPostcode:           studentDB.CurrentPostcode.String,
+		CurrentCity:               studentDB.CurrentCity.String,
+		CoName:                    studentDB.CoName.String,
+		InternshipCompany:         studentDB.InternshipCompany.String,
+		InternshipStartDate:       studentDB.InternshipStartDate.String,
+		InternshipEndDate:         studentDB.InternshipEndDate.String,
+		InternshipCompanyAddress:  studentDB.InternshipCompanyAddress.String,
+		InternshipCompanyPostcode: studentDB.InternshipCompanyPostcode.String,
+		InternshipCompanyCity:     studentDB.InternshipCompanyCity.String,
+		InternshipSupervisorName:  studentDB.InternshipSupervisorName.String,
+		InternshipSupervisorEmail: studentDB.InternshipSupervisorEmail.String,
+		InternshipSupervisorPhone: studentDB.InternshipSupervisorPhone.String,
+		ExchangeYear:              studentDB.ExchangeYear.Int16,
+	}
+
+	return student, nil
+}
