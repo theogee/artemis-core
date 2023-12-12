@@ -19,7 +19,8 @@ func Setup(path string) {
 		stdlog.Fatalf("[logger.Setup] error opening log file. path: %v. err: %v", path, err)
 	}
 
-	multiWriter := io.MultiWriter(os.Stdout, f)
+	// multiWriter := io.MultiWriter(os.Stdout, f)
+	multiWriter := io.MultiWriter(f)
 
 	Log = stdlog.New(multiWriter, "", stdlog.LstdFlags)
 
