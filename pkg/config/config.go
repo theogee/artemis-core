@@ -17,8 +17,9 @@ type (
 	}
 
 	Service struct {
-		Host string `json:"host"`
-		Port int    `json:"port"`
+		Host       string `json:"host"`
+		Port       int    `json:"port"`
+		StaticPath string `json:"static_path"`
 	}
 
 	Database struct {

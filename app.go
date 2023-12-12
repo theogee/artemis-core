@@ -29,6 +29,7 @@ func startApp(cfg *config.Config, db *database.Database, c *cache.Cache) {
 	artemisHandler := artemisHandler.NewHandler(cfg, artemisUsecase)
 
 	registerRoutes(cfg, router, artemisHandler)
+	registerWebPlatform(cfg, router)
 
 	addr := fmt.Sprintf("%v:%v", cfg.Service.Host, cfg.Service.Port)
 
