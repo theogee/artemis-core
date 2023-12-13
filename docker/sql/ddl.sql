@@ -23,7 +23,7 @@ CREATE TABLE "students" (
 	passport_number VARCHAR,
 	date_of_issue DATE,
 	date_of_expiry DATE,
-	issueing_office VARCHAR,
+	issuing_office VARCHAR,
 	-- support for internship data
 	internship_company VARCHAR,
 	internship_start_date DATE,
