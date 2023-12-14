@@ -33,6 +33,7 @@ type (
 		Gender                    sql.NullString `csv:"gender" db:"gender" json:"gender"`
 		SGUMajorID                uint32         `db:"sgu_major_id"`
 		SGUMajor                  string         `csv:"sgu_major" db:"sgu_major" json:"sguMajor"`
+		SGUMajorCode              string         `db:"sgu_major_code"`
 		FHDepartmentID            uint32         `db:"fh_department_id"`
 		FHDepartment              string         `csv:"fh_department" json:"fhDepartment" db:"fh_department"`
 		StudentID                 uint32         `csv:"student_id" db:"student_id" json:"studentID"`

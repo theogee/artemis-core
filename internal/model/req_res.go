@@ -131,6 +131,7 @@ type (
 		Surname                   string `json:"surname"`
 		Gender                    string `json:"gender"`
 		SGUMajor                  string `json:"sguMajor"`
+		SGUMajorInitial           string `json:"sguMajorInitial"`
 		FHDepartment              string `json:"fhDepartment"`
 		StudentID                 uint32 `json:"studentID"`
 		DateOfBirth               string `json:"dateOfBirth"`
