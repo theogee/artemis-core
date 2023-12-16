@@ -86,4 +86,26 @@ const (
 		FROM students s, sgu_majors sgu, fh_departments fh 
 		WHERE s.student_id = $1 AND s.sgu_major_id = sgu.major_id AND fh.department_id = s.fh_department_id
 	`
+
+	UpdateStudentByIDQuery = `
+		UPDATE students
+		SET
+		mobile_phone = $1,
+		mobile_phone_de = $2,
+		private_email = $3,
+		current_address = $4,
+		current_postcode = $5,
+		current_city = $6,
+		co_name = $7,
+		internship_company = $8,
+		internship_start_date = $9,
+		internship_end_date = $10,
+		internship_company_address = $11,
+		internship_company_postcode = $12,
+		internship_company_city = $13,
+		internship_supervisor_name = $14,
+		internship_supervisor_email = $15,
+		internship_supervisor_phone = $16
+		WHERE student_id = $17
+	`
 )

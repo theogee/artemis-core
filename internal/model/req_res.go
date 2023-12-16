@@ -15,7 +15,9 @@ const (
 )
 
 const (
-	AdminCreatedSuccessfully = "new admin with username: %v has been created"
+	AdminCreatedSuccessfully         = "new admin with username: %v has been created"
+	StudentIDDoesNotExist            = "studentID: %v doesn't exist"
+	StudentWithIDUpdatedSuccessfully = "studentID: %v has been updated"
 )
 
 type (
@@ -161,5 +163,30 @@ type (
 		InternshipSupervisorEmail string `json:"internshipSupervisorEmail"`
 		InternshipSupervisorPhone string `json:"internshipSupervisorPhone"`
 		ExchangeYear              int16  `json:"exchangeYear"`
+	}
+
+	UpdateStudentByIDRequest struct {
+		StudentID                 int64
+		MobilePhone               string
+		MobilePhoneDE             string
+		PrivateEmail              string
+		CurrentAddress            string
+		CurrentPostcode           interface{}
+		CurrentCity               string
+		CoName                    string
+		InternshipCompany         string
+		InternshipStartDate       interface{}
+		InternshipEndDate         interface{}
+		InternshipCompanyAddress  string
+		InternshipCompanyPostcode interface{}
+		InternshipCompanyCity     string
+		InternshipSupervisorName  string
+		InternshipSupervisorEmail string
+		InternshipSupervisorPhone string
+	}
+
+	UpdateStudentByIDResponse struct {
+		ErrMessage []string `json:"errMessage,omitempty"`
+		Message    []string `json:"message,omitempty"`
 	}
 )

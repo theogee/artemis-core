@@ -20,6 +20,7 @@ func registerRoutes(cfg *config.Config, router *httprouter.Router, artemisHandle
 	router.POST("/api/logout", artemisHandler.Authenticate(artemisHandler.Logout))
 	router.POST("/api/meta", artemisHandler.Authenticate(artemisHandler.GetMeta))
 	router.GET("/api/students/:studentID", artemisHandler.Authenticate(artemisHandler.GetStudentByID))
+	router.PUT("/api/students/:studentID", artemisHandler.Authenticate(artemisHandler.UpdateStudentByID))
 
 	// admin only
 	router.GET("/api/students", artemisHandler.Authenticate(artemisHandler.Authorize(artemisHandler.GetStudents, model.UserTypeAdmin)))
