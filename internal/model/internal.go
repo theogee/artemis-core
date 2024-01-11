@@ -13,6 +13,7 @@ var (
 		"Food Technology":                 7,
 		"Accounting":                      8,
 		"Industrial Engineering":          9,
+		"Hotel and Tourism Management":    10,
 	}
 
 	FHDepartments = map[string]int{
