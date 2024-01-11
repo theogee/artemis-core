@@ -20,19 +20,34 @@ func (u *ArtemisUsecase) GetStudents(data *model.GetStudentsRequest) ([]*model.S
 	}
 
 	var mobilePhone string
+	var sguEmail string
 	for _, s := range studentsDB {
 		// TODO: make sure to sanitize mobile phone when inserting data to db, otherwise s[1:] operation will panic!
+		// if s.MobilePhoneDE.String != "" {
+		// 	mobilePhone = "+49 " + s.MobilePhoneDE.String[1:]
+		// } else {
+		// 	mobilePhone = "+62 " + s.MobilePhone.String[1:]
+		// }
+
 		if s.MobilePhoneDE.String != "" {
-			mobilePhone = "+49 " + s.MobilePhoneDE.String[1:]
+			mobilePhone = s.MobilePhoneDE.String
+		} else if s.MobilePhone.String != "" {
+			mobilePhone = s.MobilePhone.String
 		} else {
-			mobilePhone = "+62 " + s.MobilePhone.String[1:]
+			mobilePhone = "-"
+		}
+
+		if s.SGUEmail.String != "" {
+			sguEmail = s.SGUEmail.String
+		} else {
+			sguEmail = "-"
 		}
 
 		student := &model.StudentSimple{
 			StudentID:    s.StudentID,
 			Name:         s.GivenName + " " + s.Surname.String,
 			SGUMajor:     s.SGUMajor,
-			SGUEmail:     s.SGUEmail.String,
+			SGUEmail:     sguEmail,
 			MobilePhone:  mobilePhone,
 			ExchangeYear: s.ExchangeYear.Int16,
 		}
