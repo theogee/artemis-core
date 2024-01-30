@@ -105,7 +105,10 @@ const (
 		internship_company_city = $13,
 		internship_supervisor_name = $14,
 		internship_supervisor_email = $15,
-		internship_supervisor_phone = $16
-		WHERE student_id = $17
+		internship_supervisor_phone = $16,
+		sgu_email = $17,
+		fh_email = $18,
+		iban = $19
+		WHERE student_id = $20
 	`
 )

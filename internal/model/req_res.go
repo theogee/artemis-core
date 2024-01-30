@@ -183,6 +183,9 @@ type (
 		InternshipSupervisorName  string
 		InternshipSupervisorEmail string
 		InternshipSupervisorPhone string
+		SGUEmail                  string
+		FHEmail                   string
+		IBAN                      string
 	}
 
 	UpdateStudentByIDResponse struct {

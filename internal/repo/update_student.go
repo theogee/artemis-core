@@ -11,7 +11,7 @@ func (r *ArtemisRepo) UpdateStudentByID(data *model.UpdateStudentByIDRequest) er
 		log       = logger.Log
 	)
 
-	_, err := r.db.Conn.Exec(UpdateStudentByIDQuery, data.MobilePhone, data.MobilePhoneDE, data.PrivateEmail, data.CurrentAddress, data.CurrentPostcode, data.CurrentCity, data.CoName, data.InternshipCompany, data.InternshipStartDate, data.InternshipEndDate, data.InternshipCompanyAddress, data.InternshipCompanyPostcode, data.InternshipCompanyCity, data.InternshipSupervisorName, data.InternshipSupervisorEmail, data.InternshipSupervisorPhone, data.StudentID)
+	_, err := r.db.Conn.Exec(UpdateStudentByIDQuery, data.MobilePhone, data.MobilePhoneDE, data.PrivateEmail, data.CurrentAddress, data.CurrentPostcode, data.CurrentCity, data.CoName, data.InternshipCompany, data.InternshipStartDate, data.InternshipEndDate, data.InternshipCompanyAddress, data.InternshipCompanyPostcode, data.InternshipCompanyCity, data.InternshipSupervisorName, data.InternshipSupervisorEmail, data.InternshipSupervisorPhone, data.SGUEmail, data.FHEmail, data.IBAN, data.StudentID)
 	if err != nil {
 		log.Printf("%v error updating student data to database. err: %v", logPrefix, err)
 		return err

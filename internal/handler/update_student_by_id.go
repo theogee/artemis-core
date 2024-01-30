@@ -93,6 +93,9 @@ func (h *ArtemisHandler) UpdateStudentByID(w http.ResponseWriter, r *http.Reques
 		InternshipSupervisorName:  r.FormValue("internshipSupervisorName"),
 		InternshipSupervisorEmail: r.FormValue("internshipSupervisorEmail"),
 		InternshipSupervisorPhone: r.FormValue("internshipSupervisorPhone"),
+		SGUEmail:                  r.FormValue("sguEmail"),
+		FHEmail:                   r.FormValue("fhEmail"),
+		IBAN:                      r.FormValue("iban"),
 	}
 
 	err = h.artemisUsecase.UpdateStudentByID(data)
